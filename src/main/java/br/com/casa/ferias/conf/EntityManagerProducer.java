@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -17,14 +18,14 @@ public class EntityManagerProducer implements Serializable {
     @PersistenceContext(unitName = "white-dragon")
     private EntityManager entityManager;
 
+    @Produces
+    public EntityManager createEntityManager() {
+        return Persistence.createEntityManagerFactory("white-dragon").createEntityManager();
+    }
 //    @Produces
-//    public EntityManager createEntityManager() {
+//    public EntityManager entityManager() {
 //        return Persistence.createEntityManagerFactory("white-dragon").createEntityManager();
 //    }
-    @Produces
-    public EntityManager entityManager() {
-        return entityManager;
-    }
 
     public void closeEntityManager(@Disposes EntityManager manager) {
         if (manager.isOpen()) {

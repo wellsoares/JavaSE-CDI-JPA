@@ -12,9 +12,10 @@ import javax.persistence.EntityManager;
  * @param <T>
  * @param <PK>
  */
-public abstract class GenericDAO<T, PK> {
+public class GenericDAO<T, PK> {
 
     public final EntityManager manager;
+
 
     public GenericDAO(EntityManager manager) {
         this.manager = manager;
@@ -41,6 +42,7 @@ public abstract class GenericDAO<T, PK> {
         manager.remove(entity);
     }
 
+    @Transactional
     public List<T> findAll() {
         List<T> list = manager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
         return list;
@@ -50,5 +52,4 @@ public abstract class GenericDAO<T, PK> {
         Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         return clazz;
     }
-
 }

@@ -1,7 +1,7 @@
 package br.com.casa.ferias.dao;
 
-import br.com.casa.ferias.interfaces.Transactional;
 import br.com.casa.ferias.model.User;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -10,14 +10,9 @@ import javax.persistence.EntityManager;
  */
 public class UserDao extends GenericDAO<User, Integer> {
 
+    @Inject
     public UserDao(EntityManager manager) {
         super(manager);
-    }
-
-    @Override
-    @Transactional
-    public void save(User u) {
-        manager.persist(u);
     }
 
 }
