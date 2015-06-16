@@ -24,6 +24,7 @@ public class TransactionInterceptor {
         em.getTransaction().begin();
         Object resultado = null;
         try {
+
             resultado = ctx.proceed();
             em.getTransaction().commit();
 

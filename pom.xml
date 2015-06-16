@@ -15,6 +15,7 @@
     </repositories>
     <dependencies>
 
+        <!-- Injeção de dependências -->
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jandex</artifactId>
@@ -33,12 +34,14 @@
             <version>1.2</version>
         </dependency>
 
+        <!--Driver banco de dados -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1201-jdbc41</version>
         </dependency>
 
+        <!--Framework ORM hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -50,6 +53,51 @@
             <version>SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!--Módulo de extensão do CDI com JPAModule -->
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>1.4.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-api</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+       
+        <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-weld</artifactId>
+            <version>1.4.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <!--Módulo de extensão JPA do DeltaSpike -->
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jpa-module-api</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-jpa-module-impl</artifactId>
+            <version>1.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+        
     </dependencies>
 
 
@@ -57,5 +105,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <weld.version>2.2.12.Final</weld.version>
+        <deltaspike.version>1.4.0</deltaspike.version>
     </properties>
 </project>

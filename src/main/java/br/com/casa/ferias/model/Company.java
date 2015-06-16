@@ -1,14 +1,19 @@
 package br.com.casa.ferias.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -20,7 +25,7 @@ public class Company implements Serializable {
 
     @Id
     @Column(nullable = false)
-    @SequenceGenerator( sequenceName = "seq_company", allocationSize = 1, name = "id")
+    @SequenceGenerator(sequenceName = "seq_company", allocationSize = 20, name = "id")
     @GeneratedValue(generator = "id", strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(name = "company_name", nullable = false, length = 40)
@@ -41,6 +46,9 @@ public class Company implements Serializable {
     private String city;
     @Column(name = "province", length = 20)
     private String province;
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    private List<PurchaseBuyer> purchaseBuyers;
 
     @Override
     public int hashCode() {
@@ -147,5 +155,13 @@ public class Company implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public List<PurchaseBuyer> getPurchaseBuyers() {
+        return purchaseBuyers;
+    }
+
+    public void setPurchaseBuyers(List<PurchaseBuyer> purchaseBuyers) {
+        this.purchaseBuyers = purchaseBuyers;
     }
 }
