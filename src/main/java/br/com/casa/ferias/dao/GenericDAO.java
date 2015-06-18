@@ -1,8 +1,11 @@
 package br.com.casa.ferias.dao;
 
+import br.com.casa.ferias.model.User;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
@@ -14,14 +17,16 @@ import org.apache.deltaspike.jpa.api.transaction.Transactional;
 @Transactional
 public class GenericDAO<T, PK> {
 
-    public final EntityManager manager;
+    @Inject
+    public EntityManager manager;
+    private final Class persistentClass;
 
-    public GenericDAO(EntityManager manager) {
-        this.manager = manager;
+    public GenericDAO(Class c) {
+        persistentClass = c;
     }
 
     public T getById(PK pk) {
-        Object o = manager.find(getTypeClass(), (Serializable) pk);
+        Object o = manager.find(persistentClass, (Serializable) pk);
         return (T) o;
     }
 
@@ -38,12 +43,7 @@ public class GenericDAO<T, PK> {
     }
 
     public List<T> findAll() {
-        List<T> list = manager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
+        List<T> list = manager.createQuery(("FROM " + persistentClass.getName())).getResultList();
         return list;
-    }
-
-    private Class<?> getTypeClass() {
-        Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        return clazz;
     }
 }

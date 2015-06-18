@@ -40,11 +40,10 @@ public class EntityManagerProducer implements Serializable {
         System.out.println("asdsads !!!");
     }
 
-    public void closeEntityManager(@Disposes EntityManagerFactory factory) {
-        if (factory.isOpen()) {
-            factory.close();
-            System.out.println("FECHOU FACTORY !!!");
-        }
-
-    }
+//    public void closeEntityManager(@Disposes EntityManagerFactory factory) {
+//        if (factory.isOpen()) {
+//            factory.close();
+//            System.out.println("FECHOU FACTORY !!!");
+//        }
+//    }
 }

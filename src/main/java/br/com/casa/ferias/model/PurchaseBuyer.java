@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.casa.ferias.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -42,13 +37,16 @@ public class PurchaseBuyer implements Serializable {
     private String paymentMethod;
     @Column(name = "delivery_time", length = 4)
     private Integer deliveryTime;
-    @Column(length = 400)
-    private String detaill;
+    @Column(length = 400, name = "detail")
+    private String detail;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     @Fetch(FetchMode.JOIN)
     private Company company;
+
+    @OneToMany(mappedBy = "purchase_buyer", fetch = FetchType.LAZY)
+    private List<PurchaseBuyerItem> purchaseBuyerItems;
 
     public Integer getId() {
         return id;
@@ -83,11 +81,11 @@ public class PurchaseBuyer implements Serializable {
     }
 
     public String getDetaill() {
-        return detaill;
+        return detail;
     }
 
     public void setDetaill(String detaill) {
-        this.detaill = detaill;
+        this.detail = detaill;
     }
 
     public Company getCompany() {
@@ -96,6 +94,14 @@ public class PurchaseBuyer implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public List<PurchaseBuyerItem> getPurchaseBuyerItems() {
+        return purchaseBuyerItems;
+    }
+
+    public void setPurchaseBuyerItems(List<PurchaseBuyerItem> purchaseBuyerItems) {
+        this.purchaseBuyerItems = purchaseBuyerItems;
     }
 
 }

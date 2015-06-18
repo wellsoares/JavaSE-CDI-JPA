@@ -1,6 +1,6 @@
 package br.com.casa.ferias.interceptor;
 
-import br.com.casa.ferias.interfaces.Transactional;
+import br.com.casa.ferias.interfaces.TransactionalInterceptor;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
  * @author well
  */
 @Interceptor
-@Transactional
+@TransactionalInterceptor
 public class TransactionInterceptor {
 
     @Inject

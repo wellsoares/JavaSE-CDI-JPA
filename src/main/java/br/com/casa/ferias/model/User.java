@@ -1,6 +1,7 @@
 package br.com.casa.ferias.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 public class User implements Serializable {
 
     @Id
-    @SequenceGenerator( sequenceName = "seq_users", allocationSize = 20, name = "id")
+    @SequenceGenerator(sequenceName = "seq_users", allocationSize = 20, name = "id")
     @GeneratedValue(generator = "id", strategy = GenerationType.SEQUENCE)
     @Column(nullable = false)
     private Integer id;
@@ -99,4 +100,27 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

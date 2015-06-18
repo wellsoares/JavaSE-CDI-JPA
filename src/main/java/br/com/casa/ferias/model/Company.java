@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -74,9 +72,9 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "Company{" + "id=" + id + '}';
+        return "Company{" + "id=" + id + ", companyName=" + companyName + ", purchaseBuyers=" + purchaseBuyers + '}';
     }
-
+    
     public Integer getId() {
         return id;
     }
