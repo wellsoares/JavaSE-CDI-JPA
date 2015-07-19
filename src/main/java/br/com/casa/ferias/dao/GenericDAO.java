@@ -1,9 +1,6 @@
 package br.com.casa.ferias.dao;
 
-import br.com.casa.ferias.model.User;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
